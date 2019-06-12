@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ItemService } from '../services/item.service';
+import { Item } from '../classes/item';
 
 @Component({
   selector: 'app-reserve',
@@ -6,8 +9,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reserve.component.less']
 })
 export class ReserveComponent implements OnInit {
+  day: number;
+  selected_items: HTMLCollection[];
 
-  constructor() {  }
+  constructor(private modal: NgbModal, private items: ItemService) {  }
 
   ngOnInit() {
   }
@@ -35,6 +40,29 @@ export class ReserveComponent implements OnInit {
       split.push(full.splice(0, 7));
     }
     return split;
+  }
+
+  public openModal(modal: any, day: number) {
+    this.modal.open(modal).result.then((result) => {
+      if (result === 'reserve') {
+        this.day = day;
+        for (let i = 0; i < this.selected_items.length; i++) {
+          this.items.reserveItem((<any>this.selected_items[i]).value, day);
+        }
+      }
+     }, (reason) => {});
+  }
+
+  public getItems(): Item[] {
+    return this.items.getItems().sort((a, b) => {
+      if ( a.name < b.name ) {
+        return -1;
+      } else if (a.name > b.name ) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
   }
 
 }
