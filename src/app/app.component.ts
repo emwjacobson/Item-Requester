@@ -10,6 +10,6 @@ export class AppComponent {
   title = 'Item-Requester';
   pages = [
     { title: 'Home', addr: '' },
-    { title: 'Items', addr: 'items' }
+    { title: 'Item List', addr: 'items' }
   ];
 }

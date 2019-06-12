@@ -11,7 +11,7 @@
 <ng-template #deleteModal let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Delete Item?</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('close')">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('close')" >
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -34,7 +34,8 @@
     <div class="modal-body">
         <div class="form-group">
             <label for="itemName">Item Name</label>
-            <input type="text" class="form-control" id="itemName" placeholder="Enter Name" [value]="add_item" (input)="add_item = $event.target.value">
+            <input type="text" class="form-control" id="itemName" placeholder="Enter Name" [value]="add_item" (input)="add_item = $event.target.value"
+            (keyup.enter)="modal.close('add')">
         </div>
     </div>
     <div class="modal-footer">
