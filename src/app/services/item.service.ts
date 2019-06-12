@@ -22,23 +22,15 @@ export class ItemService {
 
   public deleteItem(item: Item) {
     // Need to query for the item
-    this.itemCollection.ref.where('name', '==', item.name).limit(1).get().then((snap) => {
-      if (snap.empty) {
-        return;
-      }
-      // Delete using the id
-      this.itemCollection.doc(snap.docs[0].id).delete().then((val) => {
-        console.log('Item deleted');
-      },
-      (reason) => {
-        console.log('Error Deleting', reason);
-      });
-    }, (reason) => {
-      console.log('Error in query', reason);
-    });
+    item.id.delete();
   }
 
-  public addItem(item_name: String) {
-    this.itemCollection.add({ name: item_name });
+  public addItem(item_name: string) {
+    this.itemCollection.add({ name: item_name }).then((doc) => {
+      // Add its own ID to make deleting easier. Also makes requesting items easier.
+      doc.update({ id: doc });
+    }, (reason) => {
+      console.log('Error adding item', reason);
+    });
   }
 }

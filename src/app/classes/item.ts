@@ -1,3 +1,6 @@
+import { DocumentReference } from '@angular/fire/firestore';
+
 export class Item {
-    name: String;
+    name: string;
+    id?: DocumentReference;
 }

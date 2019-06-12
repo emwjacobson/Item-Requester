@@ -9,8 +9,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./items.component.less']
 })
 export class ItemsComponent implements OnInit {
-  cur_item: Item = undefined;
-  add_item: String = '';
+  cur_item: Item;
+  add_item = '';
 
   constructor(private items: ItemService, private modal: NgbModal) { }
 
