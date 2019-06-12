@@ -18,7 +18,15 @@ export class ItemsComponent implements OnInit {
   }
 
   public getItems(): Item[] {
-    return this.items.getItems();
+    return this.items.getItems().sort((a, b) => {
+      if ( a.name < b.name ) {
+        return -1;
+      } else if (a.name > b.name ) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
   }
 
   public deleteItem(modal: any, i: Item) {
