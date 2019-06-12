@@ -1,1 +1,44 @@
-Items!
+<div style="text-align: center">
+    <button type="button" class="btn btn-success" (click)="addItem(addModal)">Add Item</button>
+</div>
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let i of getItems()">
+        {{ i.name }}
+        <h4><span class="badge badge-danger" (click)="deleteItem(deleteModal, i)">Delete</span></h4>
+    </li>
+</ul>
+
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Delete Item?</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('close')">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+            Are you sure you want to delete <b>{{ cur_item.name }}</b>?
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modal.close('delete')">Delete</button>
+        <button type="button" class="btn btn-secondary" (click)="modal.close('cancel')">Cancel</button>
+    </div>
+</ng-template>
+
+<ng-template #addModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Item</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('close')">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="itemName">Item Name</label>
+            <input type="text" class="form-control" id="itemName" placeholder="Enter Name" [value]="add_item" (input)="add_item = $event.target.value">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="modal.close('add')">Add</button>
+        <button type="button" class="btn btn-secondary" (click)="modal.close('cancel')">Cancel</button>
+    </div>
+</ng-template>
