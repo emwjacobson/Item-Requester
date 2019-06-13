@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../classes/item';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentSnapshot } from '@angular/fire/firestore';
 import { Reserve } from '../classes/reserve';
 
 @Injectable({
@@ -21,6 +21,9 @@ export class ItemService {
     this.reserveCollection = db.collection('reserves');
     this.reserveCollection.valueChanges().subscribe((val) => {
       val.map((r: any) => {
+        r.item.get().then((data: DocumentSnapshot<Item>) => {
+          r.item = data.data();
+        });
         r.date = r.date.toDate();
       });
       this.reserves = val;
@@ -45,9 +48,10 @@ export class ItemService {
     });
   }
 
-  public reserveItem(item_id: string, day: Date): void {
+  public reserveItem(item_id: string, person: string, day: Date): void {
     this.reserveCollection.add({
       item: this.db.doc<Item>(item_id).ref,
+      person: person,
       date: day,
       time_start: 0,
       time_end: 0

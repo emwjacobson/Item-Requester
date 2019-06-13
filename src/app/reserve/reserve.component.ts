@@ -12,6 +12,7 @@ import { Reserve } from '../classes/reserve';
 export class ReserveComponent implements OnInit {
   day: number;
   selected_items: HTMLCollection[];
+  person = '';
 
   constructor(private modal: NgbModal, private items: ItemService) {  }
 
@@ -44,15 +45,16 @@ export class ReserveComponent implements OnInit {
   }
 
   public openModal(modal: any, day: number) {
+    this.day = day;
     this.modal.open(modal).result.then((result) => {
       if (result === 'reserve') {
-        this.day = day;
         const d = new Date();
         d.setDate(day);
         d.setHours(0, 0, 0, 0);
         for (let i = 0; i < this.selected_items.length; i++) {
-          this.items.reserveItem((<any>this.selected_items[i]).value, d);
+          this.items.reserveItem((<any>this.selected_items[i]).value, this.person, d);
         }
+        this.person = '';
       }
      }, (reason) => {});
   }
@@ -74,6 +76,10 @@ export class ReserveComponent implements OnInit {
     d.setDate(day);
     d.setHours(0, 0, 0, 0);
     return this.items.getReservesForDay(d);
+  }
+
+  public print(r: any) {
+    console.log(r);
   }
 
 }

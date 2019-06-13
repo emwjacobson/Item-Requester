@@ -17,7 +17,7 @@
           <tr *ngFor="let weeks of getMonth()">
             <td *ngFor="let day of weeks" (click)="openModal(dayModal, day)">
               <div *ngIf="day != -1">
-                <b>{{ day }}</b><br>
+                <b style="float: right;">{{ day }}</b><br>
                 {{ getReservesForDay(day).length }} reserve(s) this day.
               </div>
             </td>
@@ -30,21 +30,46 @@
 
 <ng-template #dayModal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Add Item</h4>
+    <h4 class="modal-title" id="modal-basic-title">Reserves</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('close')" >
     <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
+    <h3>Items Reserved</h3>
+    <hr>
+    <table class="table">
+      <thead class="">
+        <tr>
+          <th>Item</th>
+          <th>Person</th>
+          <th>Start</th>
+          <th>End</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of getReservesForDay(day)">
+          <td>{{ r.item.name }}</td>
+          <td>{{ r.person }}</td>
+          <td>{{ r.time_start }}</td>
+          <td>{{ r.time_end }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Request an Item</h3>
+    <hr>
     <div class="form-group">
-      <label>What items are needed?</label>
+      <label>Name</label>
+      <input type="text" class="form-control" placeholder="Name" [value]="person">
+    </div>
+    <div class="form-group">
+      <label>Items Needed</label>
       <select multiple class="form-control" (change)="selected_items = $event.target.selectedOptions">
         <option *ngFor="let item of getItems()" value="{{ item.id.path }}">{{ item.name }}</option>
       </select>
     </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="modal.close('reserve')">Reserve</button>
+    <button type="button" class="btn btn-success" (click)="modal.close('reserve')">Reserve</button>&nbsp;
     <button type="button" class="btn btn-secondary" (click)="modal.close('cancel')">Cancel</button>
   </div>
 </ng-template>
