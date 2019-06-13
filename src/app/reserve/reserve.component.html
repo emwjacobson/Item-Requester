@@ -17,7 +17,8 @@
           <tr *ngFor="let weeks of getMonth()">
             <td *ngFor="let day of weeks" (click)="openModal(dayModal, day)">
               <div *ngIf="day != -1">
-                {{ day }}
+                <b>{{ day }}</b><br>
+                {{ getReservesForDay(day).length }} reserve(s) this day.
               </div>
             </td>
           </tr>

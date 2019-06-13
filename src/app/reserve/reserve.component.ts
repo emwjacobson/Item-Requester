@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ItemService } from '../services/item.service';
 import { Item } from '../classes/item';
+import { Reserve } from '../classes/reserve';
 
 @Component({
   selector: 'app-reserve',
@@ -46,8 +47,11 @@ export class ReserveComponent implements OnInit {
     this.modal.open(modal).result.then((result) => {
       if (result === 'reserve') {
         this.day = day;
+        const d = new Date();
+        d.setDate(day);
+        d.setHours(0, 0, 0, 0);
         for (let i = 0; i < this.selected_items.length; i++) {
-          this.items.reserveItem((<any>this.selected_items[i]).value, day);
+          this.items.reserveItem((<any>this.selected_items[i]).value, d);
         }
       }
      }, (reason) => {});
@@ -63,6 +67,13 @@ export class ReserveComponent implements OnInit {
         return 0;
       }
     });
+  }
+
+  public getReservesForDay(day: number): Reserve[] {
+    const d = new Date();
+    d.setDate(day);
+    d.setHours(0, 0, 0, 0);
+    return this.items.getReservesForDay(d);
   }
 
 }
