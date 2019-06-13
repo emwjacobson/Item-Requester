@@ -4,7 +4,7 @@ export class Reserve {
     item: DocumentReference;
     person: string;
     date: Date;
-    time_start: number;
-    time_end: number;
+    time_start: string;
+    time_end: string;
     id?: DocumentReference;
 }

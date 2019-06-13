@@ -30,7 +30,7 @@
 
 <ng-template #dayModal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Reserves</h4>
+    <h4 class="modal-title" id="modal-basic-title"></h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('close')" >
     <span aria-hidden="true">&times;</span>
     </button>
@@ -58,18 +58,29 @@
         </tr>
       </tbody>
     </table>
-
+    <br>
     <h3>Request an Item</h3>
     <hr>
     <div class="form-group">
       <label>Name</label>
-      <input type="text" class="form-control" placeholder="Name" [value]="person">
+      <input type="text" class="form-control" placeholder="Name" [value]="person"
+      (input)="person = $event.target.value">
     </div>
     <div class="form-group">
       <label>Items Needed</label>
       <select multiple class="form-control" (change)="selected_items = $event.target.selectedOptions">
         <option *ngFor="let item of getItems()" value="{{ item.id.path }}">{{ item.name }}</option>
       </select>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Start Time</label>
+        <input type="text" class="form-control" placeholder="Start Time" (input)="start_time = $event.target.value">
+      </div>
+      <div class="form-group col-md-6">
+        <label>End Time</label>
+        <input type="text" class="form-control" placeholder="End Time" (input)="end_time = $event.target.value">
+      </div>
     </div>
     <button type="button" class="btn btn-success" (click)="modal.close('reserve')">Reserve</button>&nbsp;
     <button type="button" class="btn btn-secondary" (click)="modal.close('cancel')">Cancel</button>

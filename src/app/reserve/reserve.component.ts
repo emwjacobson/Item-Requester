@@ -13,6 +13,8 @@ export class ReserveComponent implements OnInit {
   day: number;
   selected_items: HTMLCollection[];
   person = '';
+  start_time = '';
+  end_time = '';
 
   constructor(private modal: NgbModal, private items: ItemService) {  }
 
@@ -52,9 +54,11 @@ export class ReserveComponent implements OnInit {
         d.setDate(day);
         d.setHours(0, 0, 0, 0);
         for (let i = 0; i < this.selected_items.length; i++) {
-          this.items.reserveItem((<any>this.selected_items[i]).value, this.person, d);
+          this.items.reserveItem((<any>this.selected_items[i]).value, this.person, d, this.start_time, this.end_time);
         }
         this.person = '';
+        this.start_time = '';
+        this.end_time = '';
       }
      }, (reason) => {});
   }
@@ -75,7 +79,18 @@ export class ReserveComponent implements OnInit {
     const d = new Date();
     d.setDate(day);
     d.setHours(0, 0, 0, 0);
-    return this.items.getReservesForDay(d);
+    return this.items.getReservesForDay(d).sort((a, b) => {
+      // Gotta cheat a little because we make .item (DocumentReference) into an object in item.service
+      const ia = (<any>a.item);
+      const ib = (<any>b.item);
+      if ( ia.name > ib.name ) {
+        return 1;
+      } else if ( ia.name < ib.name ) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
   }
 
   public deleteReserve(r: Reserve): void {

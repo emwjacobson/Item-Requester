@@ -49,13 +49,13 @@ export class ItemService {
     });
   }
 
-  public reserveItem(item_id: string, person: string, day: Date): void {
+  public reserveItem(item_id: string, person: string, day: Date, start_time: string, end_time: string): void {
     this.reserveCollection.add({
       item: this.db.doc<Item>(item_id).ref,
       person: person,
       date: day,
-      time_start: 0,
-      time_end: 0
+      time_start: start_time,
+      time_end: end_time
     }).then((doc) => {
       doc.update({ id: doc });
     });
