@@ -6,4 +6,5 @@ export class Reserve {
     date: Date;
     time_start: number;
     time_end: number;
+    id?: DocumentReference;
 }

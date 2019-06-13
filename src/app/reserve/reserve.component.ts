@@ -78,8 +78,8 @@ export class ReserveComponent implements OnInit {
     return this.items.getReservesForDay(d);
   }
 
-  public print(r: any) {
-    console.log(r);
+  public deleteReserve(r: Reserve): void {
+    this.items.deleteReserve(r);
   }
 
 }

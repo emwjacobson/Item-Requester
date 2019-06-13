@@ -22,6 +22,7 @@ export class ItemService {
     this.reserveCollection.valueChanges().subscribe((val) => {
       val.map((r: any) => {
         r.item.get().then((data: DocumentSnapshot<Item>) => {
+          // This makes the DocumentReference into an Item, its a little hacky.
           r.item = data.data();
         });
         r.date = r.date.toDate();
@@ -55,6 +56,8 @@ export class ItemService {
       date: day,
       time_start: 0,
       time_end: 0
+    }).then((doc) => {
+      doc.update({ id: doc });
     });
   }
 
@@ -62,5 +65,9 @@ export class ItemService {
     return this.reserves.filter((r) => {
       return r.date.getTime() === day.getTime();
     });
+  }
+
+  public deleteReserve(r: Reserve): void {
+    r.id.delete();
   }
 }

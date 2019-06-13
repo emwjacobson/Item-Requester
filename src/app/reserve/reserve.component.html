@@ -45,6 +45,7 @@
           <th>Person</th>
           <th>Start</th>
           <th>End</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -53,6 +54,7 @@
           <td>{{ r.person }}</td>
           <td>{{ r.time_start }}</td>
           <td>{{ r.time_end }}</td>
+          <td><span class="badge badge-danger" (click)="deleteReserve(r)">Delete</span></td>
         </tr>
       </tbody>
     </table>
