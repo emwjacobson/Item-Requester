@@ -25,7 +25,7 @@ export class ReserveComponent implements OnInit {
     const date = new Date();
     // Months are 0-based...
     const month = date.getMonth() + 1;
-    return new Date(date.getFullYear(), month, 0).getDate();
+    return new Date(date.getFullYear(), month, 0).getUTCDate();
   }
 
   // Returns day of the week, 0 is Sunday, 6 is Saturday
@@ -51,8 +51,8 @@ export class ReserveComponent implements OnInit {
     this.modal.open(modal).result.then((result) => {
       if (result === 'reserve') {
         const d = new Date();
-        d.setDate(day);
-        d.setHours(0, 0, 0, 0);
+        d.setUTCDate(day);
+        d.setUTCHours(0, 0, 0, 0);
         for (let i = 0; i < this.selected_items.length; i++) {
           this.items.reserveItem((<any>this.selected_items[i]).value, this.person, d, this.start_time, this.end_time);
         }
@@ -77,8 +77,8 @@ export class ReserveComponent implements OnInit {
 
   public getReservesForDay(day: number): Reserve[] {
     const d = new Date();
-    d.setDate(day);
-    d.setHours(0, 0, 0, 0);
+    d.setUTCDate(day);
+    d.setUTCHours(0, 0, 0, 0);
     return this.items.getReservesForDay(d).sort((a, b) => {
       // Gotta cheat a little because we make .item (DocumentReference) into an object in item.service
       const ia = (<any>a.item);
