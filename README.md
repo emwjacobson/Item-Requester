@@ -2,7 +2,7 @@
 
 At work we have a limited number of items, such as computers and iPads, and we have a hard time managing who needs which items on which days for their classes. That gave me the idea for creating something to manage who has which items on certain days, and what would still be free for someone else to use.
 
-This project was built using Angular 7.1.4, and uses Google Firebase for hosting and the database.
+This project was built using Angular 8.0.1, and uses Google Firebase for hosting and the database.
 
 ## Development server
 
@@ -18,7 +18,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Stats
 
-Episodes of The Office Watched During Development: 24
+Episodes of The Office Watched During Development: 28
 
 <!-- ## Running unit tests
 
