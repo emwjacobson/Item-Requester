@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../classes/item';
-import { AngularFirestore, AngularFirestoreCollection, DocumentSnapshot } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentSnapshot, QuerySnapshot } from '@angular/fire/firestore';
 import { Reserve } from '../classes/reserve';
 
 @Injectable({
@@ -36,8 +36,17 @@ export class ItemService {
   }
 
   public deleteItem(item: Item): void {
-    // Need to query for the item
-    item.id.delete();
+    // First delete all reserves with the item
+    this.reserveCollection.ref.where('item', '==', item.id).get().then((query: QuerySnapshot<Reserve>) => {
+      console.log('Query: ', query);
+      query.docs.forEach((doc) => {
+        console.log('Item', doc);
+        // Delete each item
+        doc.ref.delete();
+      });
+      // Finally delete the item
+      item.id.delete();
+    });
   }
 
   public addItem(item_name: string): void {
