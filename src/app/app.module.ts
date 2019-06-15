@@ -10,13 +10,17 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { ReserveComponent } from './reserve/reserve.component';
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ItemsComponent,
-    ReserveComponent
+    ReserveComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

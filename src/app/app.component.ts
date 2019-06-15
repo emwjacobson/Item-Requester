@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,4 +13,12 @@ export class AppComponent {
     { title: 'Reserve', addr: 'res' },
     { title: 'Item List', addr: 'items' }
   ];
+
+  constructor(private auth: AuthService) {
+
+  }
+
+  public isLoggedIn(): boolean {
+    return this.auth.isLoggedIn();
+  }
 }
