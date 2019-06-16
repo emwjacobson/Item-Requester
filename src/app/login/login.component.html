@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="card">
+              <div class="card-header">Login</div>
+                <div class="card-body">
+                    <!-- <h5 class="card-title">Login</h5> -->
+                    <form [formGroup]="loginGroup" (ngSubmit)="submit()">
+                      <div class="form-group">
+                        <label for="loginbox">Username</label>
+                        <input type="text" class="form-control" id="loginbox" placeholder="Enter Username" formControlName="username">
+                      </div>
+                      <div class="form-group">
+                        <label for="passwordbox">Password</label>
+                        <input type="password" class="form-control" id="passwordbox" placeholder="Password" formControlName="password">
+                      </div>
+                      <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

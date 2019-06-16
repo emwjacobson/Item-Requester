@@ -18,6 +18,10 @@ export class AppComponent {
 
   }
 
+  public getPages(): Object[] {
+    return this.isLoggedIn() ? this.pages : [];
+  }
+
   public isLoggedIn(): boolean {
     return this.auth.isLoggedIn();
   }
