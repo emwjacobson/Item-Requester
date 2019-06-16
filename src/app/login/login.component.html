@@ -1,14 +1,15 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4 offset-md-4">
+        <div class="col-md-6 offset-md-3">
             <div class="card">
               <div class="card-header">Login</div>
                 <div class="card-body">
                     <!-- <h5 class="card-title">Login</h5> -->
+                    <ngb-alert [type]="alert.type" [dismissible]="false" *ngIf="alert.message != ''">{{ alert.message }}</ngb-alert>
                     <form [formGroup]="loginGroup" (ngSubmit)="submit()">
                       <div class="form-group">
-                        <label for="loginbox">Username</label>
-                        <input type="text" class="form-control" id="loginbox" placeholder="Enter Username" formControlName="username">
+                        <label for="loginbox">Email</label>
+                        <input type="text" class="form-control" id="loginbox" placeholder="Enter Email" formControlName="username">
                       </div>
                       <div class="form-group">
                         <label for="passwordbox">Password</label>

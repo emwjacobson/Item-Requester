@@ -14,9 +14,7 @@ export class AppComponent {
     { title: 'Item List', addr: 'items' }
   ];
 
-  constructor(private auth: AuthService) {
-
-  }
+  constructor(private auth: AuthService) { }
 
   public getPages(): Object[] {
     return this.isLoggedIn() ? this.pages : [];
