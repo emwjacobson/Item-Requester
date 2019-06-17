@@ -5,12 +5,12 @@ import { ItemsComponent } from './items/items.component';
 import { ReserveComponent } from './reserve/reserve.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
-import { AngularFireAuthGuard, loggedIn, canActivate } from '@angular/fire/auth-guard';
+import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'res', component: ReserveComponent, ...canActivate(loggedIn) },
-  { path: 'items', component: ItemsComponent, canActivate: [AngularFireAuthGuard] },
+  { path: 'res', component: ReserveComponent, ...canActivate(redirectUnauthorizedTo(['login'])) },
+  { path: 'items', component: ItemsComponent, ...canActivate(redirectUnauthorizedTo(['login'])) },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: '**', redirectTo: '' }

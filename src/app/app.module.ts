@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ItemsComponent } from './items/items.component';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestoreModule, AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { ReserveComponent } from './reserve/reserve.component';
@@ -35,7 +35,9 @@ import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
     ReactiveFormsModule,
     AngularFireAuthGuardModule
   ],
-  providers: [],
+  providers: [
+    AngularFirestore
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
